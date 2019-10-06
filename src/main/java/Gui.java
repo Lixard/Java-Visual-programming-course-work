@@ -1,8 +1,9 @@
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.MalformedURLException;
 
 
 final class Gui extends JFrame {
@@ -32,7 +33,14 @@ final class Gui extends JFrame {
                 File file = fileOpen.getSelectedFile();
 //                label.setText(file.getName());
                 if (getFileExtension(file).equals(".java")) {
-                    new Parser(file);
+                    JavaClassLoader javaClassLoader = new JavaClassLoader(file);
+                    try {
+                        javaClassLoader.loadClass();
+                    } catch (MalformedURLException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+
+
                 } else {
                     JOptionPane.showMessageDialog(panel, "Неправильный тип файла");
                 }
@@ -49,7 +57,8 @@ final class Gui extends JFrame {
         setVisible(true);
     }
 
-    private String getFileExtension(File file) {
+    @NotNull
+    private String getFileExtension(@NotNull File file) {
         String name = file.getName();
         int lastIndexOf = name.lastIndexOf(".");
         if (lastIndexOf == -1) {
