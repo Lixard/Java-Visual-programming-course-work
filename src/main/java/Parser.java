@@ -19,5 +19,4 @@ final class Parser {
     Parser(@NotNull File file) {
         this.file = file;
     }
-
 }

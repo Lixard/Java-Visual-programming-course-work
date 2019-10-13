@@ -3,6 +3,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 
@@ -36,7 +37,7 @@ final class Gui extends JFrame {
                     JavaClassLoader javaClassLoader = new JavaClassLoader(file);
                     try {
                         javaClassLoader.loadClass();
-                    } catch (MalformedURLException | ClassNotFoundException ex) {
+                    } catch (ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
                     }
 
