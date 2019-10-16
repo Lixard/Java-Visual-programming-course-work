@@ -34,14 +34,7 @@ final class Gui extends JFrame {
                 File file = fileOpen.getSelectedFile();
 //                label.setText(file.getName());
                 if (getFileExtension(file).equals(".java")) {
-                    JavaClassLoader javaClassLoader = new JavaClassLoader(file);
-                    try {
-                        javaClassLoader.loadClass();
-                    } catch (ClassNotFoundException | IOException ex) {
-                        ex.printStackTrace();
-                    }
-
-
+                    new Parser(file);
                 } else {
                     JOptionPane.showMessageDialog(panel, "Неправильный тип файла");
                 }

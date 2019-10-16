@@ -18,5 +18,28 @@ final class Parser {
 
     Parser(@NotNull File file) {
         this.file = file;
+        parse();
+    }
+
+    private void parse() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(file);
+            String str;
+            while (scanner.hasNextLine()) {
+                str = scanner.nextLine();
+                if (str.trim().startsWith("/**")) {
+                    str = scanner.nextLine();
+                    while (!str.trim().startsWith("*/")) {
+                        arrayList.add(str);
+                        str = scanner.nextLine();
+                    }
+                    // здесь нужно решить трабл с аннотациями @@@@@@@@@@@@@
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Arrays.toString(arrayList.toArray()));
     }
 }
