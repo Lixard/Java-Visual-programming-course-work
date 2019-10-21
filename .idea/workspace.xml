@@ -13,16 +13,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Gui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/JavaClassLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Testing.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JavaClassLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Testing.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -230,8 +224,20 @@
       <workItem from="1570361009067" duration="14680000" />
       <workItem from="1570973886377" duration="5069000" />
       <workItem from="1570988623522" duration="782000" />
-      <workItem from="1571223617238" duration="2441000" />
+      <workItem from="1571223617238" duration="2598000" />
+      <workItem from="1571648000048" duration="7000" />
+      <workItem from="1571658855235" duration="2277000" />
+      <workItem from="1571682415806" duration="2998000" />
+      <workItem from="1571685595100" duration="5000" />
     </task>
+    <task id="LOCAL-00001" summary="turned back">
+      <created>1571229348155</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571229348155</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,5 +265,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="turned back" />
+    <option name="LAST_COMMIT_MESSAGE" value="turned back" />
   </component>
 </project>

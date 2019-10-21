@@ -3,8 +3,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 
 
 final class Gui extends JFrame {
@@ -34,7 +32,8 @@ final class Gui extends JFrame {
                 File file = fileOpen.getSelectedFile();
 //                label.setText(file.getName());
                 if (getFileExtension(file).equals(".java")) {
-                    new Parser(file);
+                    QDoxTest test = new QDoxTest(file);
+                    test.doSomething();
                 } else {
                     JOptionPane.showMessageDialog(panel, "Неправильный тип файла");
                 }
