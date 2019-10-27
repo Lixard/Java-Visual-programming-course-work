@@ -3,6 +3,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 
 final class Gui extends JFrame {
@@ -32,8 +33,13 @@ final class Gui extends JFrame {
                 File file = fileOpen.getSelectedFile();
 //                label.setText(file.getName());
                 if (getFileExtension(file).equals(".java")) {
-                    QDoxTest test = new QDoxTest(file);
-                    test.doSomething();
+                    ClassParser test = null;
+                    try {
+                        test = new ClassParser(file);
+                        test.doSomething();
+                    } catch (FileNotFoundException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(panel, "Неправильный тип файла");
                 }
