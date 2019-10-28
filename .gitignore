@@ -3,3 +3,5 @@
 /.idea/
 /lib/
 /.gradle/
+gradlew
+gradlew.bat
