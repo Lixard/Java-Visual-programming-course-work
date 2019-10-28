@@ -36,7 +36,6 @@ final class Gui extends JFrame {
                     ClassParser test = null;
                     try {
                         test = new ClassParser(file);
-
                     } catch (FileNotFoundException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }

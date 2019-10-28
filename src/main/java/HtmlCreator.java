@@ -8,7 +8,11 @@ public final class HtmlCreator {
         this.classParser = classParser;
     }
 
-    private void generateHTML() {
 
+
+    @NotNull
+    private String generateHTML() {
+        String html = "";
+        return html;
     }
 }
