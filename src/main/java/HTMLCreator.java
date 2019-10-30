@@ -25,6 +25,7 @@ final class HTMLCreator {
     void generateHTML() {
 
     }
+
     @NotNull
     String getSuperClassName() {
         JavaType javaType = cls.getSuperClass();
