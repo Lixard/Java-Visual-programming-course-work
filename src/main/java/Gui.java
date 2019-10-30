@@ -33,9 +33,10 @@ final class Gui extends JFrame {
                 File file = fileOpen.getSelectedFile();
 //                label.setText(file.getName());
                 if (getFileExtension(file).equals(".java")) {
-                    ClassParser test = null;
                     try {
-                        test = new ClassParser(file);
+                        ClassParser classParser = new ClassParser(file);
+                        HTMLCreator htmlCreator = new HTMLCreator(classParser);
+                        htmlCreator.generateHTML();
                     } catch (FileNotFoundException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }
