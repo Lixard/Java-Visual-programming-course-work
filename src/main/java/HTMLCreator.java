@@ -4,9 +4,11 @@ import com.thoughtworks.qdox.model.JavaSource;
 import com.thoughtworks.qdox.model.JavaType;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 final class HTMLCreator {
 
@@ -22,13 +24,29 @@ final class HTMLCreator {
     }
 
 
-    void generateHTML() {
-
+    @NotNull
+    String generateHTML() {
+        return  "<h2>Class ClassName</h2>\n" +
+                "<p>java.lang.Object <br/>\n" +
+                getSuperClassName() + "<br/>\n" +
+                cls.getName() + "</p>\n" +
+                "<p>final class CreateFile<br/>\n" +
+                "extends java.lang.Object</p>";
     }
 
     @NotNull
-    String getSuperClassName() {
+    private String getSuperClassName() {
         JavaType javaType = cls.getSuperClass();
         return javaType.getCanonicalName();
+    }
+
+    void runJavaDoc(File file) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

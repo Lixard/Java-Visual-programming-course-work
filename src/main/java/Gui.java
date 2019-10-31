@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 final class Gui extends JFrame {
@@ -35,8 +37,14 @@ final class Gui extends JFrame {
                 if (getFileExtension(file).equals(".java")) {
                     try {
                         HTMLCreator htmlCreator = new HTMLCreator(file);
-                        htmlCreator.generateHTML();
-                    } catch (FileNotFoundException | ClassNotFoundException ex) {
+
+                        File javadoc = new File("javadoc.html");
+                        FileWriter writer = new FileWriter(javadoc, false);
+                        writer.write(htmlCreator.generateHTML());
+                        writer.close();
+
+                        htmlCreator.runJavaDoc(javadoc);
+                    } catch (ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
                     }
                 } else {
