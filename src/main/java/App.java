@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.util.Arrays;
 
 public final class App {
     public static void main(String[] args) {

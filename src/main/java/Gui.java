@@ -1,9 +1,9 @@
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.text.html.HTML;
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -36,14 +36,8 @@ final class Gui extends JFrame {
 //                label.setText(file.getName());
                 if (getFileExtension(file).equals(".java")) {
                     try {
-                        HTMLCreator htmlCreator = new HTMLCreator(file);
-
-                        File javadoc = new File("javadoc.html");
-                        FileWriter writer = new FileWriter(javadoc, false);
-                        writer.write(htmlCreator.generateHTML());
-                        writer.close();
-
-                        htmlCreator.runJavaDoc(javadoc);
+                        HtmlCreator creator = new HtmlCreator(file);
+                        creator.test();
                     } catch (ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
                     }
@@ -56,7 +50,6 @@ final class Gui extends JFrame {
         panel.add(button);
         panel.add(Box.createVerticalGlue());
         getContentPane().add(panel);
-
         setPreferredSize(new Dimension(350, 120));
         pack();
         setLocationRelativeTo(null);

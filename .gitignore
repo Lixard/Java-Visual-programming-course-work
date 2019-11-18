@@ -3,6 +3,7 @@
 /.idea/
 /lib/
 /.gradle/
+/out/
 gradlew
 gradlew.bat
 javadoc.html
