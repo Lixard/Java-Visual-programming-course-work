@@ -1,7 +1,7 @@
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
-import html.FieldSummaryTable;
-import html.MethodSummaryTable;
+import html.tables.FieldSummaryTable;
+import html.tables.MethodSummaryTable;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 final class HtmlCreator {
@@ -26,7 +25,7 @@ final class HtmlCreator {
     }
 
     void test() {
-        List<JavaField> fields = cls.getFields();
+//        List<JavaField> fields = cls.getFields();
 
 //        System.out.println(fields.get(0).getName());
 //        System.out.println(fields.get(0).toString());
@@ -34,15 +33,22 @@ final class HtmlCreator {
 //        System.out.println(fields.get(0).getType().getCanonicalName());
 //        System.out.println(fields.get(0).getType().getName());
 //        System.out.println(fields.get(0).getComment());
-        List<JavaMethod> methods = cls.getMethods();
-        System.out.println(methods.get(0).getName());
-        System.out.println(methods.get(0).getPropertyName());
-        System.out.println(methods.get(0).getCallSignature());
-        System.out.println(methods.get(1).getReturnType().toString());
-        List<JavaConstructor> constructors = cls.getConstructors();
+//        List<JavaMethod> methods = cls.getMethods();
+//        System.out.println(methods.get(0).getName());
+//        System.out.println(methods.get(0).getPropertyName());
+//        System.out.println(methods.get(0).getCallSignature());
+//        System.out.println(methods.get(1).getReturnType().toString());
 
-        System.out.println();
-        System.out.println();
+        List<JavaClass> interfaces = cls.getInterfaces();
+        if (interfaces.size() > 0) {
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
+        List<JavaClass> classes = cls.getImplements()
+//        List<JavaConstructor> constructors = cls.getConstructors();
+//        System.out.println();
+//        System.out.println();
     }
 
     void generateHTML() {

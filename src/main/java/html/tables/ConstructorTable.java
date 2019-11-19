@@ -1,4 +1,4 @@
-package html;
+package html.tables;
 
 public final class ConstructorTable extends Table {
 

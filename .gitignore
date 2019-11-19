@@ -6,4 +6,4 @@
 /out/
 gradlew
 gradlew.bat
-javadoc.html
+/html/.idea/
