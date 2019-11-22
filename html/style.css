@@ -1,0 +1,11 @@
+caption {
+    text-align: left;
+    font-size: 25px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+table {
+    text-align: left;
+    width: 100%;
+}
