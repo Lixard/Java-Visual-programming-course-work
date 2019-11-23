@@ -1,14 +1,11 @@
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
-import html.tables.FieldSummaryTable;
-import html.tables.MethodSummaryTable;
+import html.Base;
+import html.CSSFile;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.Desktop;
+import java.io.*;
 import java.util.List;
 
 final class HtmlCreator {
@@ -20,80 +17,58 @@ final class HtmlCreator {
         JavaSource source = builder.addSource(new FileReader(file));
         if (source.getClasses().size() > 0) {
             this.cls = source.getClasses().get(0);
-        } else
+        } else {
             throw new ClassNotFoundException("Class not found!");
+        }
+    }
+
+
+    void generateHTML() {
+        Base base = new Base();
+        base.setClassName(cls.getName());
+        base.setClassModifier(cls.getModifiers(), cls.getName());
+        base.setExtendClass(cls.getSuperClass().getFullyQualifiedName());
+        base.paragraph(cls.getComment());
+
+        FilledTables tables = new FilledTables(cls, base);
+        tables.addTables();
+        base.close();
+
+        File javadoc = createFileAndWrite(base.execute(), new CSSFile().execute());
+        runJavaDoc(javadoc);
     }
 
     void test() {
-//        List<JavaField> fields = cls.getFields();
-
-//        System.out.println(fields.get(0).getName());
-//        System.out.println(fields.get(0).toString());
-//        System.out.println(fields.get(0).getType().toString());
-//        System.out.println(fields.get(0).getType().getCanonicalName());
-//        System.out.println(fields.get(0).getType().getName());
-//        System.out.println(fields.get(0).getComment());
-//        List<JavaMethod> methods = cls.getMethods();
-//        System.out.println(methods.get(0).getName());
-//        System.out.println(methods.get(0).getPropertyName());
-//        System.out.println(methods.get(0).getCallSignature());
-//        System.out.println(methods.get(1).getReturnType().toString());
-
-        List<JavaClass> interfaces = cls.getInterfaces();
-        if (interfaces.size() > 0) {
-            System.out.println(true);
-        } else {
-            System.out.println(false);
-        }
-        List<JavaClass> classes = cls.getImplements()
-//        List<JavaConstructor> constructors = cls.getConstructors();
-//        System.out.println();
-//        System.out.println();
-    }
-
-    void generateHTML() {
-        File file = new File("/html/" + cls.getName() + ".txt");
-        try {
-            if (file.createNewFile()) {
-                System.out.println("file created!");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    String filledFieldTable() {
-        List<JavaField> list = cls.getFields();
-        FieldSummaryTable table = new FieldSummaryTable();
-        for (JavaField field : list) {
-            table.openLine();
-            table.addColumn(field.getType().toString());
-            table.addColumn(field.getName());
-            table.addColumn(field.getComment());
-            table.closeLine();
-        }
-        return table.execute();
-    }
-
-    String filledMethodTable() {
-        List<JavaMethod> list = cls.getMethods();
-        MethodSummaryTable table = new MethodSummaryTable();
-        for (JavaMethod method : list) {
-            table.openLine();
-            table.addColumn(method.getName());
-            table.addColumn(method.getCallSignature());
-        }
-        return table.execute();
+//        List<JavaField> list = cls.getFields();
+//        System.out.println(list.get(0).get);
     }
 
     @NotNull
-    private String getSuperClassName() {
-        JavaType javaType = cls.getSuperClass();
-        return javaType.getCanonicalName();
+    private File createFileAndWrite(String str, String css) {
+        File catalog = new File("html/created/" + cls.getSimpleName() + "/");
+        if (catalog.mkdirs()) {
+            System.out.println("catalog created!");
+        }
+        File file = new File(catalog, cls.getSimpleName() + ".html");
+        File cssFile = new File(catalog, "style.css");
+        try {
+            if (file.createNewFile()) {
+                System.out.println(file.getName() + " created!");
+            }
+            FileWriter writer = new FileWriter(file, false);
+            writer.write(str);
+            writer.close();
+
+            writer = new FileWriter(cssFile, false);
+            writer.write(css);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
-
-    void runJavaDoc(File file) {
+    private void runJavaDoc(File file) {
         if (Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().open(file);

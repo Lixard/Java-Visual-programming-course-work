@@ -1,8 +1,10 @@
 package html.tables;
 
-class Table {
+import org.jetbrains.annotations.NotNull;
 
-    StringBuilder html = new StringBuilder();
+public class Table {
+
+    protected StringBuilder html = new StringBuilder();
 
     public void openLine() {
         html.append("<tr>").append(System.lineSeparator());
@@ -16,8 +18,17 @@ class Table {
         html.append("<td>").append(line).append("</td>").append(System.lineSeparator());
     }
 
-     public String execute() {
-        html.append("</table>");
+    public void close() {
+        html.append("</table>").append(System.lineSeparator());
+    }
+
+    @NotNull
+    public StringBuilder raw() {
+        return html;
+    }
+
+    @NotNull
+    public String execute() {
         return html.toString();
     }
 }
