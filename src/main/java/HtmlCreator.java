@@ -1,14 +1,12 @@
 import com.thoughtworks.qdox.JavaProjectBuilder;
-import com.thoughtworks.qdox.model.*;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaSource;
 import html.Base;
 import html.CSSFile;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
 
 final class HtmlCreator {
 
@@ -40,14 +38,13 @@ final class HtmlCreator {
         runJavaDoc(javadoc);
     }
 
-    void test() {
-//        System.out.println(cls.getConstructors().get(0).getCodeBlock());
-//        System.out.println(cls.getConstructors().get(0).getAnnotations().toString());
-//        System.out.println(cls.getConstructors().get(0).getParameters().toString());
-//        System.out.println(cls.getConstructors().get(0).getName());
-//        System.out.println(cls.getConstructors().get(0).getCallSignature());
-//        System.out.println(cls.getConstructors().get(0).toString());
-    }
+//    void test() {
+//        !!!System.out.println(cls.getConstructors().get(0).getParameters().get(1).getCodeBlock());
+//        System.out.println(cls.getMethods().get(0).getCallSignature());
+//        System.out.println(cls.getMethods().get(0).getPropertyName());
+//        System.out.println(cls.getMethods().get(0).getDeclarationSignature(true));
+//        System.out.println(cls.getMethods().get(1).getDeclarationSignature(true));
+//    }
 
     @NotNull
     private File createFileAndWrite(String str, String css) {

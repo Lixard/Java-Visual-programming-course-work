@@ -1,10 +1,8 @@
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.text.html.HTML;
 import java.awt.*;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -33,12 +31,11 @@ final class Gui extends JFrame {
             int ret = fileOpen.showDialog(null, "Выбрать файл");
             if (ret == JFileChooser.APPROVE_OPTION) {
                 File file = fileOpen.getSelectedFile();
-//                label.setText(file.getName());
                 if (getFileExtension(file).equals(".java")) {
                     try {
                         HtmlCreator creator = new HtmlCreator(file);
-                        creator.test();
-//                        creator.generateHTML();
+//                        creator.test();
+                        creator.generateHTML();
                     } catch (ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
                     }

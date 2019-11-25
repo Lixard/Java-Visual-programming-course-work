@@ -1,4 +1,7 @@
-import com.thoughtworks.qdox.model.*;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaConstructor;
+import com.thoughtworks.qdox.model.JavaField;
+import com.thoughtworks.qdox.model.JavaMethod;
 import html.Base;
 import html.tables.ConstructorSummaryTable;
 import html.tables.DetailsTable;
@@ -6,24 +9,21 @@ import html.tables.FieldSummaryTable;
 import html.tables.MethodSummaryTable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 final class FilledTables {
 
     @NotNull
     private final JavaClass cls;
-
+    @NotNull
     private final Base base;
+
+    private final Util util = new Util();
 
     FilledTables(@NotNull JavaClass cls, @NotNull Base base) {
         this.cls = cls;
         this.base = base;
     }
-    // TO DO:
-    // убрать все, что содержит private
-    // Таблицы с деталями
 
     void addTables() {
         boolean isFieldsExists = cls.getFields().size() > 0;
@@ -52,10 +52,10 @@ final class FilledTables {
             base.append(constructorDetailTable());
         }
 
-//        if (isMethodsExists) {
-//            base.heading("Method Detail");
-//            base.append(methodDetailTable());
-//        }
+        if (isMethodsExists) {
+            base.heading("Method Detail");
+            base.append(methodDetailTable());
+        }
     }
 
     @NotNull
@@ -64,7 +64,7 @@ final class FilledTables {
         FieldSummaryTable table = new FieldSummaryTable();
         for (JavaField field : list) {
             table.openLine();
-            table.addColumn(getModifiersToString(field) + field.getType().toString());
+            table.addColumn(util.getModifiersToString(field) + field.getType().toString());
             table.addColumn(field.getName());
             table.addColumn(field.getComment());
             table.closeLine();
@@ -80,7 +80,7 @@ final class FilledTables {
         MethodSummaryTable table = new MethodSummaryTable();
         for (JavaMethod method : list) {
             table.openLine();
-            table.addColumn(getModifiersToString(method) + method.getReturnType().toGenericString());
+            table.addColumn(util.getModifiersToString(method) + method.getReturnType().toGenericString());
             table.addColumn(method.getCallSignature());
             table.addColumn(method.getComment());
             table.closeLine();
@@ -109,10 +109,9 @@ final class FilledTables {
         List<JavaField> list = cls.getFields();
         for (JavaField field : list) {
             DetailsTable table = new DetailsTable();
-            table.addHeader(field.getName());
+            table.addTableHeader(field.getName());
 
-            String str = getFullName(field);
-            str += "<br/>" + field.getComment();
+            String str = util.getFullFieldName(field) + "<br/>" + field.getComment();
             table.openLine();
             table.addColumn(str);
             table.closeLine();
@@ -124,52 +123,42 @@ final class FilledTables {
     }
 
     @NotNull
-    String constructorDetailTable() {
+    private String constructorDetailTable() {
         StringBuilder tables = new StringBuilder();
         List<JavaConstructor> list = cls.getConstructors();
         for (JavaConstructor constructor : list) {
             DetailsTable table = new DetailsTable();
-            table.addHeader(constructor.getName());
+            table.addTableHeader(constructor.getName());
 
-            String str = getFullName(constructor);
-            str += "<br/>" + constructor.getComment();
+            String str = util.getFullConstructorName(constructor) + "<br/>" + constructor.getComment();
             table.openLine();
             table.addColumn(str);
             table.closeLine();
             table.close();
             table.emptyHeader();
-
             tables.append(table.raw());
         }
         return tables.toString();
     }
 
     @NotNull
-    String methodDetailTable() {
+    private String methodDetailTable() {
+        StringBuilder tables = new StringBuilder();
         List<JavaMethod> list = cls.getMethods();
-        return "";
+        for (JavaMethod method : list) {
+            DetailsTable table = new DetailsTable();
+            table.addTableHeader(method.getName());
+
+            String str = method.getDeclarationSignature(true) + "<br/><br/>" + method.getComment();
+            table.openLine();
+            table.addColumn(str);
+            table.closeLine();
+            table.close();
+            table.emptyHeader();
+            tables.append(table.raw());
+        }
+        return tables.toString();
     }
 
-    @NotNull
-    private String getFullName(@NotNull JavaModel model) {
-        Scanner scanner = new Scanner(model.getCodeBlock());
-        StringBuilder result = new StringBuilder();
-        while (scanner.hasNextLine()) {
-            String str = scanner.nextLine();
-            if (!str.contains("*")) {
-                result.append(str).append("<br/>").append(System.lineSeparator());
-            }
-        }
-        return result.toString();
-    }
 
-    @NotNull
-    private String getModifiersToString(@NotNull JavaMember javaMember) {
-        List<String> list = javaMember.getModifiers();
-        String modifiers = "";
-        for (String str : list) {
-            modifiers = modifiers.concat(str + " ");
-        }
-        return modifiers;
-    }
 }
