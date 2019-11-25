@@ -1,15 +1,18 @@
 package html.tables;
 
-public class DetailsTable extends Table {
+public final class DetailsTable extends Table {
 
     public DetailsTable() {
         super();
         html.append("<table>").append(System.lineSeparator());
     }
 
-    public void addFieldName(String str) {
+    public void addHeader(String str) {
         openLine();
         html.append("<th>").append(str).append("</th>").append(System.lineSeparator());
         closeLine();
+    }
+    public void emptyHeader() {
+        html.append("<h3>").append("</h3>").append(System.lineSeparator());
     }
 }

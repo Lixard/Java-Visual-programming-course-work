@@ -6,6 +6,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.Desktop;
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 final class HtmlCreator {
@@ -39,8 +41,12 @@ final class HtmlCreator {
     }
 
     void test() {
-//        List<JavaField> list = cls.getFields();
-//        System.out.println(list.get(0).get);
+//        System.out.println(cls.getConstructors().get(0).getCodeBlock());
+//        System.out.println(cls.getConstructors().get(0).getAnnotations().toString());
+//        System.out.println(cls.getConstructors().get(0).getParameters().toString());
+//        System.out.println(cls.getConstructors().get(0).getName());
+//        System.out.println(cls.getConstructors().get(0).getCallSignature());
+//        System.out.println(cls.getConstructors().get(0).toString());
     }
 
     @NotNull

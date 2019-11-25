@@ -37,7 +37,7 @@ final class Gui extends JFrame {
                 if (getFileExtension(file).equals(".java")) {
                     try {
                         HtmlCreator creator = new HtmlCreator(file);
-//                        creator.test();
+                        creator.test();
 //                        creator.generateHTML();
                     } catch (ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
